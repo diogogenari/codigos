@@ -1,4 +1,4 @@
-//Classe Pai
+//Classe Pai (SUPERCLASSE)
 class ContaBancaria {
     private String cliente;
     private int numConta;
@@ -7,6 +7,7 @@ class ContaBancaria {
     public float sacar(float valor) {
         float saldoAtual = this.saldo;
         saldoAtual = saldoAtual - valor;
+        
         if (saldoAtual < 0) {
             return this.saldo;
         }
@@ -39,14 +40,32 @@ class ContaBancaria {
    }
 }
 
-//Classe Filha 
+//Classe Filha (SUBCLASSE)
 class ContaPoupanca extends ContaBancaria {
-   
-   public void setNumConta (int numConta) {
-       this.numConta = numConta;
+    private int DiaDeRendimento; 
+   public void calcularNovoSaldo(int taxaRendimento){
+       this.setSaldo(taxaRendimento * this.getSaldo());
    }
 }
 
 class ContaEspecial extends ContaBancaria {
+    private float limite;
     
+    @Override
+    public float sacar(float valor) {
+        float saldoAtual = this.saldo;
+        saldoAtual -= valor;
+        if(saldoAual < -this.getLimite()) {
+            return this.getSaldo();
+        }
+        this.saldo(this.getSaldo() - valor);
+        return this.getSaldo();
+}
+    public float getLimite() {
+        return this.limite;
+    }
+    public void setLimite(float limite) {
+        this.limite = limite;
+        this.setSaldo(this.limite + this.getSaldo());
+    }
 }
